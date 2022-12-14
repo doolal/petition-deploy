@@ -1,0 +1,72 @@
+<section>
+
+    <!-- Header:Showcase -->
+    <header id="showcase">
+        <div class="showcase-content">
+
+            <h1 class="l-heading">
+                PETITION: Demand the Senate Increase Paediatric Hospital Funding
+            </h1>
+            <p>During winter many sick kids are turned away from hospitals due
+                to bed shortage. Sign our petition to urge the senate increase
+                funding.
+            </p>
+
+            <a href="#what" class="btn">Read More</a>
+
+            <form action="/petition" method="POST">
+                <div class="form-group">
+
+                    <label for="first_name">First Name</label>
+                    <input class="inp" type="text" name="first_name" />
+                    <label for="last_name">Last Name</label>
+                    <input class="inp" type="text" name="last_name" />
+                    <button
+                        class="btn"
+                        type="submit"
+                        value="submit"
+                    >Submit</button>
+                </div>
+
+                <div>
+                    <canvas
+                        id="canvass"
+                        width="400px"
+                        height="100px"
+                        name="canvas"
+                    ></canvas>
+
+                    <input
+                        type="hidden"
+                        id="canvasHidden"
+                        name="EncodedSignature"
+                    />
+
+                    <div>
+
+                        <input
+                            type="button"
+                            value="save"
+                            class="btnCanvas"
+                            id="btn"
+                            size="30"
+                            onclick="save()"
+                        />
+                        <input
+                            type="button"
+                            value="clear"
+                            class="btnCanvas"
+                            id="clr"
+                            size="23"
+                            onclick="erase()"
+                        />
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </header>
+
+</section>
