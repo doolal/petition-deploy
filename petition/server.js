@@ -220,7 +220,7 @@ app.post("/userprofile", requireLoggedInUSer, (req, res) => {
     if (homepage.startsWith("http://") || homepage.startsWith("https://")) {
         updatedHomepage = homepage;
     } else {
-        updatedHomepage = "http://" + homepage;
+        updatedHomepage = "https://" + homepage;
     }
 
     // user_id is set in the cookie
@@ -284,6 +284,13 @@ app.post("/profile/edit", requireLoggedInUSer, (req, res) => {
 
     console.log("passwooooooord", password);
 
+    let updatedHomepage;
+    if (homepage.startsWith("http://") || homepage.startsWith("https://")) {
+        updatedHomepage = homepage;
+    } else {
+        updatedHomepage = "https://" + homepage;
+    }
+
     //check if password has been set
     if (password != "") {
         hashPass(password)
@@ -300,7 +307,7 @@ app.post("/profile/edit", requireLoggedInUSer, (req, res) => {
                 return db.updateUserProfiles(
                     city,
                     age,
-                    homepage,
+                    updatedHomepage,
                     req.session.userID
                 );
             })
@@ -318,7 +325,7 @@ app.post("/profile/edit", requireLoggedInUSer, (req, res) => {
                 return db.updateUserProfiles(
                     city,
                     age,
-                    homepage,
+                    updatedHomepage,
                     req.session.userID
                 );
 
