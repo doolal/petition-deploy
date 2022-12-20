@@ -1,8 +1,8 @@
 //CONNECT TO POSTGRES DATABASE
 require("dotenv").config();
-const { SQL_USER, SQL_PASSWORD } = process.env; // add a .env file next to the db.js file with your PostgreSQL credentials
+const { DB_URL } = process.env; // add a .env file next to the db.js file with your PostgreSQL credentials
 const spicedPg = require("spiced-pg");
-const db = spicedPg(`postgres:dolal:@localhost:5432/petition`);
+const db = spicedPg(DB_URL);
 
 /*
 //  - getAllSignatures - use db.query to get all signatures from table signatures
@@ -134,9 +134,13 @@ module.exports.usersWithoutPwdUpdate = (
 module.exports.updateUserProfiles = (city, age, homepage, user_id) => {
     let sql = `INSERT INTO user_profiles (city, age, homepage, user_id) VALUES ($1,$2,$3,$4)
     ON CONFLICT(user_id)
-    DO UPDATE SET city =$1, age=$2, homepage=$3 WHERE id = $4`;
+    DO UPDATE SET city =$1, age=$2, homepage=$3`;
     return db.query(sql, [city, age, homepage, user_id]);
 };
+
+/*
+INSERT INTO user_profiles (city, age, homepage, user_id) VALUES ('Berlin',20,'www.apple.com',1) ON CONFLICT(user_id) DO UPDATE SET city ='Berlin', age=20, homepage= 'www.apple.com';
+*/
 
 /* This query works
 SELECT users.first, users.last, users.id, user_profiles.city, user_profiles.age,user_profiles.homepage FROM users JOIN signatures ON  users.id = signatures.user_id FULL OUTER JOIN user_profiles ON users.id = user_profiles.user_id WHERE city = 'Berlin';

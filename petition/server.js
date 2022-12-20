@@ -32,8 +32,8 @@ const { hashPass, compare } = require("./encrypt");
 
 app.use(
     cookieSession({
-        //secret: process.env.SESSION_SECRET,
-        secret: "test123",
+        secret: process.env.SESSION_SECRET,
+        //secret: "test123",
         maxAge: 1000 * 60 * 60 * 24 * 14,
     })
 );
@@ -428,6 +428,8 @@ app.post("/petition", requireLoggedInUSer, requireNoSignature, (req, res) => {
     db.addSignature(req.session.userID, signature)
         .then(({ rows }) => {
             console.log("rows id", rows[0].id);
+
+            req.session.signed = true;
 
             res.redirect("/thanks");
         })
